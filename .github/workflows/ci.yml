@@ -10,7 +10,7 @@ on:
 
 jobs:
 
-  linter:
+  linter_autopep8:
     runs-on: ${{matrix.os}}
 
     strategy:
@@ -21,7 +21,7 @@ jobs:
 
     steps:
       - name: checkout code
-        run: actions/checkout@v2
+        uses: actions/checkout@v2
 
       - name: setup Python
         uses: actions/setup-python@v3
@@ -38,6 +38,7 @@ jobs:
 
   test:
     runs-on: ${{matrix.os}}
+    needs: linter_autopep8
 
     strategy:
       fail-fast: false
