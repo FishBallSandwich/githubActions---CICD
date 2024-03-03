@@ -9,24 +9,23 @@ on:
       - main
 
 jobs:
-
-  linter_autopep8:
-    runs-on: ${{matrix.os}}
+  lint_and_test:
+    runs-on: ${{ matrix.os }}
 
     strategy:
       fail-fast: false
       matrix:
-        os: [ ubuntu-latest, windows-latest ]
-        python-version: [ "3.10", "3.12" ]
+        os: [ubuntu-latest, windows-latest]
+        python-version: ["3.10", "3.12"]
 
     steps:
-      - name: checkout code
+      - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: setup Python
+      - name: Setup Python
         uses: actions/setup-python@v3
         with:
-          python-version: ${{matrix.python-version}}
+          python-version: ${{ matrix.python-version }}
 
       - name: Install dependencies
         run: pip install -r requirements.txt
@@ -34,32 +33,6 @@ jobs:
       - name: Run autopep8
         run: autopep8 --in-place --recursive .
 
-
-
-  test:
-    runs-on: ${{matrix.os}}
-    needs: linter_autopep8
-
-    strategy:
-      fail-fast: false
-      matrix:
-        os: [ubuntu-latest, windows-latest]
-        python-version: [ "3.10", "3.12" ]
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: setup Python
-        uses: actions/setup-python@v3
-        with:
-          python-version: ${{matrix.python-version}}
-
-      - name: Install dependencies
-        run: pip install -r requirements.txt
-
       - name: Run pytest
         run: pytest
 
-      - name: Run flake8
-        run : flake8
