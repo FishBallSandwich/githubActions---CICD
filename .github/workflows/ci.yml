@@ -16,7 +16,7 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-latest, windows-latest]
-        python-version: [ 3.8, 3.9, 3.10 ]
+        python-version: [ "3.8", "3.9", "3.10" ]
 
     steps:
       - name: Checkout code
@@ -32,9 +32,6 @@ jobs:
 
       - name: Run pytest
         run: pytest
-        continue-on-error: true
 
       - name: Run flake8
         run : flake8
-        continue-on-error: true
-
