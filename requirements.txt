@@ -1,0 +1,5 @@
+pandas
+requests
+pytest
+flake8
+autopep8
