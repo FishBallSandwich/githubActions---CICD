@@ -1,0 +1,41 @@
+name: CI Checks
+
+on:
+  push:
+    paths:
+      - '*.py'
+    branches:
+      - main
+  pull_request:
+    paths:
+      - '*.py'
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ${{matrix.os}}
+
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        python-version: [ 3.8, 3.9, 3.10 ]
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: setup Python
+        uses: actions/setup.python@v2
+        with:
+          python-version: ${{matrix.python-version}}
+
+      - name: Install dependencies
+        run: pip install pandas requests pytest flake8
+
+      - name: Run pytest
+        run: pytest
+
+      - name: Run flake8
+        run : flake8
+
