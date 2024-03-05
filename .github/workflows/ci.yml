@@ -46,4 +46,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Build Container
-        run: echo "Building the container"
+        run: echo "Building the container placeholder"
