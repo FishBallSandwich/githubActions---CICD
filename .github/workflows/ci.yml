@@ -33,6 +33,15 @@ jobs:
       - name: Run autopep8
         run: autopep8 --in-place --recursive .
 
+      - name: Run flake8
+        run: flake8
+
       - name: Run pytest
         run: pytest
 
+  build_docker_container_placeholder:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.merged == true
+    steps:
+      - name: Build Container
+        run: echo "Building the container"
