@@ -1,0 +1,22 @@
+name: Build Docker Image
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      - name: Build docker container
+        run: |
+          docker build -t cicd-test-image:latest .
+          echo "building the container"
+
+      - name: Pushing to AWS ECR
+        run: echo "Place holder for pushing the image to ECR"

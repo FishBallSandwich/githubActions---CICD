@@ -1,13 +1,13 @@
 name: CI Checks
 
 on:
-  push:
-    branches:
-      - main
+#  push:
+#    branches:
+#      - main
   pull_request:
     branches:
       - main
-    types: [ closed ]
+#   types: [ closed ]
 
 
 jobs:
@@ -41,9 +41,3 @@ jobs:
       - name: Run pytest
         run: pytest
 
-  build_docker_container_placeholder:
-    if: ${{ github.event.pull_request.merged }}
-    runs-on: ubuntu-latest
-    steps:
-      - name: Build Container
-        run: echo "Building the container placeholder"
